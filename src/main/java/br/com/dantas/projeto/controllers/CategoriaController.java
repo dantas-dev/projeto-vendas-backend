@@ -3,6 +3,7 @@ package br.com.dantas.projeto.controllers;
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +22,12 @@ public class CategoriaController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoriaEntity> findById(@PathVariable Integer id) {
         CategoriaEntity categoria = service.findById(id);
-        return ResponseEntity.ok().body(categoria);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(categoria);
     }
 
     @GetMapping
     public ResponseEntity<List<CategoriaEntity>> findAll() {
         List<CategoriaEntity> categorias = service.findAll();
-        return ResponseEntity.ok().body(categorias);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(categorias);
     }
 }
