@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_categorias")
-public class CategoriaEntity implements Serializable {
+@Table(name = "tb_produtos")
+public class ProdutoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,15 +16,22 @@ public class CategoriaEntity implements Serializable {
 
     private String nome;
 
-    @ManyToMany(mappedBy = "categorias")
-    private List<ProdutoEntity> produtos = new ArrayList<>();
+    private Double preco;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"))
+    private List<CategoriaEntity> categorias = new ArrayList<>();
 
 
-    public CategoriaEntity() {}
+    public ProdutoEntity() {}
 
-    public CategoriaEntity(Integer id, String nome) {
+    public ProdutoEntity(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -39,19 +46,27 @@ public class CategoriaEntity implements Serializable {
         return nome;
     }
 
-    public List<ProdutoEntity> getProdutos() {
-        return produtos;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public List<CategoriaEntity> getCategorias() {
+        return categorias;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoriaEntity that = (CategoriaEntity) o;
+        ProdutoEntity that = (ProdutoEntity) o;
         return Objects.equals(id, that.id);
     }
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
@@ -20,5 +22,11 @@ public class CategoriaController {
     public ResponseEntity<CategoriaEntity> findById(@PathVariable Integer id) {
         CategoriaEntity categoria = service.findById(id);
         return ResponseEntity.ok().body(categoria);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaEntity>> findAll() {
+        List<CategoriaEntity> categorias = service.findAll();
+        return ResponseEntity.ok().body(categorias);
     }
 }
