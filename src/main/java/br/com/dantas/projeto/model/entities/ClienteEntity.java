@@ -31,6 +31,10 @@ public class ClienteEntity implements Serializable {
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
+    @OneToMany(mappedBy = "cliente")
+    private List<PedidoEntity> pedidos = new ArrayList<>();
+
+
     public ClienteEntity() {}
 
     public ClienteEntity(Integer id, String nome, String email, String cpf, TipoCliente tipo) {
@@ -71,6 +75,10 @@ public class ClienteEntity implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public List<PedidoEntity> getPedidos() {
+        return pedidos;
     }
 
     public TipoCliente getTipo() {
