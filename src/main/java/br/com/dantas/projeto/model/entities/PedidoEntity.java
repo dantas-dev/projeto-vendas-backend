@@ -3,7 +3,9 @@ package br.com.dantas.projeto.model.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -25,6 +27,9 @@ public class PedidoEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "endereco_de_entrega_id")
     private EnderecoEntity enderecoDeEntrega;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itemPedidos = new HashSet<>();
 
     public PedidoEntity() {}
 
@@ -73,6 +78,14 @@ public class PedidoEntity implements Serializable {
 
     public void setEnderecoDeEntrega(EnderecoEntity enderecoDeEntrega) {
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public Set<ItemPedido> getItemPedidos() {
+        return itemPedidos;
+    }
+
+    public void setItemPedidos(Set<ItemPedido> itemPedidos) {
+        this.itemPedidos = itemPedidos;
     }
 
     @Override
