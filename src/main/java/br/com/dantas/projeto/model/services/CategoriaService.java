@@ -2,6 +2,7 @@ package br.com.dantas.projeto.model.services;
 
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.repositories.CategoriaRepository;
+import br.com.dantas.projeto.model.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class CategoriaService {
 
     public CategoriaEntity findById(Integer id) {
         Optional<CategoriaEntity> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + CategoriaEntity.class.getName()));
     }
 
     public List<CategoriaEntity> findAll() {
