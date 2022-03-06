@@ -7,11 +7,13 @@ import br.com.dantas.projeto.model.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @Configuration
+@Profile("test")
 public class TestConfig implements CommandLineRunner {
 
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
