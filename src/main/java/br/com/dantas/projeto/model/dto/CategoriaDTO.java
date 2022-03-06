@@ -1,13 +1,17 @@
 package br.com.dantas.projeto.model.dto;
 
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {
 
     private Integer id;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 5, max = 80, message = "O tamanho deve conter entre5 e 80 caractéres")
     private String nome;
 
     public CategoriaDTO() {}

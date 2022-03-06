@@ -1,5 +1,6 @@
 package br.com.dantas.projeto.model.services;
 
+import br.com.dantas.projeto.model.dto.CategoriaDTO;
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.repositories.CategoriaRepository;
 import br.com.dantas.projeto.model.services.exceptions.DataIntegrityException;
@@ -52,6 +53,10 @@ public class CategoriaService {
     public Page<CategoriaEntity> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.findAll(pageRequest);
+    }
+
+    public CategoriaEntity fromDTO(CategoriaDTO obj) {
+        return new CategoriaEntity(obj.getId(), obj.getNome());
     }
 
 }
