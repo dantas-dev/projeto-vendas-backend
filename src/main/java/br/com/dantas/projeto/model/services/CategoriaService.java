@@ -2,8 +2,10 @@ package br.com.dantas.projeto.model.services;
 
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.repositories.CategoriaRepository;
+import br.com.dantas.projeto.model.services.exceptions.DataIntegrityException;
 import br.com.dantas.projeto.model.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +35,15 @@ public class CategoriaService {
     public CategoriaEntity update(CategoriaEntity obj) {
         findById(obj.getId());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        try {
+            repository.deleteById(id);
+        }catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+        }
     }
 
 }
