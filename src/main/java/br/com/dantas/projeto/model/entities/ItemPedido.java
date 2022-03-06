@@ -1,5 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,6 +12,7 @@ import java.util.Objects;
 @Table(name = "tb_item_pedido")
 public class ItemPedido implements Serializable {
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -60,6 +63,7 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public PedidoEntity getPedido() {
         return id.getPedido();
     }

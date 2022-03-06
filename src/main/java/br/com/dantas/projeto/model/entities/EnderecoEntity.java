@@ -1,6 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,7 +25,7 @@ public class EnderecoEntity implements Serializable {
 
     private  String cep;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private ClienteEntity cliente;

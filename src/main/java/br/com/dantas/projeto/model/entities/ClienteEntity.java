@@ -1,6 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
 import br.com.dantas.projeto.model.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class ClienteEntity implements Serializable {
 
     private Integer tipo;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<EnderecoEntity> enderecos = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class ClienteEntity implements Serializable {
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<PedidoEntity> pedidos = new ArrayList<>();
 

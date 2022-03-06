@@ -1,6 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class ProdutoEntity implements Serializable {
 
     private Double preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "tb_produto_categoria",
@@ -26,6 +27,7 @@ public class ProdutoEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"))
     private List<CategoriaEntity> categorias = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itemPedidos = new HashSet<>();
 
@@ -38,6 +40,7 @@ public class ProdutoEntity implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public List<PedidoEntity> getPedidos() {
         List<PedidoEntity> list = new ArrayList<>();
         for (ItemPedido x : itemPedidos) {

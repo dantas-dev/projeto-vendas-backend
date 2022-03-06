@@ -1,5 +1,6 @@
 package br.com.dantas.projeto.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class CidadeEntity implements Serializable {
 
     private String nome;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "estado_id", referencedColumnName = "id")
     private EstadoEntity estado;

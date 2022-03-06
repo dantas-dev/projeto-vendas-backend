@@ -1,6 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
 import br.com.dantas.projeto.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,7 +11,10 @@ import java.util.Date;
 @Table(name = "tb_pagamentocomboleto")
 public class PagamentoComBoleto extends PagamentoEntity{
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVenciento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataPagamento;
 
     public PagamentoComBoleto() {}

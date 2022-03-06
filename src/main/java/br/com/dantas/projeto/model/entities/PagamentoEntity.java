@@ -1,6 +1,7 @@
 package br.com.dantas.projeto.model.entities;
 
 import br.com.dantas.projeto.model.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public abstract class PagamentoEntity implements Serializable {
 
     private Integer estadoPagamento;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     @MapsId
