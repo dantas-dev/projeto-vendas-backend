@@ -1,5 +1,6 @@
 package br.com.dantas.projeto.controllers;
 
+import br.com.dantas.projeto.model.dto.CategoriaDTO;
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -25,9 +27,10 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaEntity>> findAll() {
-        List<CategoriaEntity> categorias = service.findAll();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(categorias);
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<CategoriaEntity> list = service.findAll();
+        List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(listDto);
     }
 
     @PostMapping
