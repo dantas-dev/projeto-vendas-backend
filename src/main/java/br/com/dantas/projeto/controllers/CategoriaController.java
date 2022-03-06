@@ -1,9 +1,11 @@
 package br.com.dantas.projeto.controllers;
 
 import br.com.dantas.projeto.model.dto.CategoriaDTO;
+import br.com.dantas.projeto.model.dto.ClienteDTO;
 import br.com.dantas.projeto.model.entities.CategoriaEntity;
 import br.com.dantas.projeto.model.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +53,16 @@ public class CategoriaController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "nome")String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC")String direction) {
+        Page<CategoriaEntity> list = service.findPage(page, linesPerPage, orderBy, direction);
+        Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
+        return ResponseEntity.ok().body(listDto);
     }
 }

@@ -52,6 +52,11 @@ public class TestConfig implements CommandLineRunner {
         // INSTÂNCIA CATEGORIA
         CategoriaEntity categoria1 = new CategoriaEntity(null, "Informática");
         CategoriaEntity categoria2 = new CategoriaEntity(null, "Escritório");
+        CategoriaEntity categoria3 = new CategoriaEntity(null, "Cama mesa e banho");
+        CategoriaEntity categoria4 = new CategoriaEntity(null, "Eletrônicos");
+        CategoriaEntity categoria5 = new CategoriaEntity(null, "Jardinagem");
+        CategoriaEntity categoria6 = new CategoriaEntity(null, "Decoração");
+        CategoriaEntity categoria7 = new CategoriaEntity(null, "Perfumaria");
         // INSTÂNCIA PRODUTO
         ProdutoEntity produto1 = new ProdutoEntity(null, "Desktop", 2000.00);
         ProdutoEntity produto2 = new ProdutoEntity(null, "Impressora", 800.00);
@@ -63,7 +68,7 @@ public class TestConfig implements CommandLineRunner {
         produto1.getCategorias().addAll(Arrays.asList(categoria1));
         produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
         produto3.getCategorias().addAll(Arrays.asList(categoria1));
-        categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
+        categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2,categoria3, categoria4, categoria5, categoria6, categoria7));
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 
 
