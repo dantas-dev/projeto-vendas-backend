@@ -25,4 +25,10 @@ public class PedidoService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + PedidoEntity.class.getName()));
     }
 
+    public PedidoEntity insert(PedidoEntity obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
+
+
 }

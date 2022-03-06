@@ -25,4 +25,14 @@ public class ClienteService {
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + ClienteEntity.class.getName()));
     }
+
+    public ClienteEntity insert(ClienteEntity obj) {
+        obj.setId(null);
+        return repository.save(obj);
+    }
+
+    public ClienteEntity update(ClienteEntity obj) {
+        findById(obj.getId());
+        return repository.save(obj);
+    }
 }
